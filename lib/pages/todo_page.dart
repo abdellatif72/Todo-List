@@ -20,59 +20,35 @@ class _TodoPageState extends State<TodoPage> {
 
   @override
   Widget build(BuildContext context) {
+    int doneTodo = 0;
+    int remTodo = 0;
     final primaryColor = Color.fromRGBO(79, 79, 79, 1);
     final prov = Provider.of<TodoProvider>(context);
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.grey[50],
-      // backgroundColor: Colors.cyan,
+      // backgroundColor: Colors.red,
       body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: width * 0.1),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15),
+          child: Center(
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 500),
+              constraints: BoxConstraints(maxWidth: 300),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Spacer(),
-                  // Title
-                  Text(
-                    'Your To Do',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w900,
-                      fontSize: 30,
-                      fontFamily: 'Inter',
-                      color: Color.fromRGBO(79, 79, 79, 1),
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  // Add task text field
+                  Text('Your To Do'),
                   Row(
                     children: [
                       Expanded(
                         child: TextField(
-                          cursorColor: Color.fromRGBO(79, 79, 79, 0.4),
                           controller: _input,
                           decoration: InputDecoration(
+                            labelText: 'Task',
                             hintText: 'Add new task',
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color.fromRGBO(79, 79, 79, 0.7),
-                                width: 2,
-                              ),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color.fromRGBO(79, 79, 79, 0.7),
-                                width: 2,
-                              ),
-                            ),
                           ),
                         ),
                       ),
-                      SizedBox(width: 8),
-                      IconButton.filled(
+                      IconButton(
                         onPressed: () {
                           if (_input.text.isNotEmpty) {
                             prov.addTodo(_input.text);
@@ -80,42 +56,33 @@ class _TodoPageState extends State<TodoPage> {
                           }
                         },
                         icon: Icon(Icons.add),
-                        style: IconButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          backgroundColor: Color.fromRGBO(79, 79, 79, 1),
-                        ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
+            
+                  /// Show a the list of todos
                   Expanded(
                     child: ListView.builder(
-                      itemCount: prov.todos.length,
                       itemBuilder: (context, index) {
-                        final todo = prov.todos[index];
                         return Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            side: const BorderSide(
+                              color: Colors.grey,
+                              width: 1
+                            )
+                          ),
                           child: ListTile(
-                            leading: Checkbox(value: todo.isDone, onChanged: (_) => prov.toggleTodo(index)),
-                            title: Text(
-                              todo.title,
-                              style: TextStyle(
-                                decoration: todo.isDone 
-                                    ? TextDecoration.lineThrough
-                                    : TextDecoration.none
-                              ),
-                            ),
-                            trailing: IconButton(
-                              onPressed: () => prov.removeTodo(index),
-                              icon: const Icon(Icons.delete_outline)
-                            ),
+                            title: Text(prov.todos[index].title),
+                            trailing: const Icon(Icons.arrow_forward_ios),
                           ),
                         );
                       },
+                      itemCount: prov.todos.length,
                     ),
                   ),
-                  const Spacer(),
+            
+                  Text('Your remaining todos: ${prov.remainingTasks}')
                 ],
               ),
             ),

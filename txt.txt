@@ -1,0 +1,21 @@
+
+
+I will design the ui again from scratch
+i will tell you what i will do and you will be my mentor and coach, you will help me implementing, you just give hints. I should think and things should be challening and that is so normal for me. the most helpful thing you will do is just giving a small hint like: 'you are tying to do x, try using y' and so on. and if i asked you about something specific you will answer me.
+
+What i will try to build is the following: 
+i need to have the content in the center of the page at first
+intially, i will have a title, and below that title, there will be the text filed and besides it on the right, there will be the add button (it will be an action button)
+then below that row, there will be the list, at first, there is nothing in the list of todos so nothing will be shown.
+below it, at the end of content, there will be a text that shows how many tasks are done.
+
+when i add each task in the list, it will be shown, and each one will be added above the other, and they will go down one after the other, till they reach the end of the screen, then the title (that was at the top of all components) will move up for each task i add, till it reaches the top of the screen, then it will not move again. and for each task i add, it will be added at top of the other tasks and the other tasks will move down, and for me or the user, to reach the tasks below, the one will scroll down to see them.
+
+
+
+alright, i have some questions 
+why to use the safe area?
+what can ConstrainedBox do? 
+what is SingleChildScrollView used for?
+
+how can i use SingleChildScrollView to make it makes the title moves up at first and then when the total height of the screen is reached, it allows scrolling?
