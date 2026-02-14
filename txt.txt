@@ -19,3 +19,19 @@ what can ConstrainedBox do?
 what is SingleChildScrollView used for?
 
 how can i use SingleChildScrollView to make it makes the title moves up at first and then when the total height of the screen is reached, it allows scrolling?
+
+---------------------------
+
+
+
+this is what i have done till now and the ui is not as i want, the actual thing is that the expanded of the list of todos made the title moves to the top of the page even when the list is empty and also made the text that shows how many remaining todos to be at the bottom of the screen even when with the list is empty and that is not what i wanted.
+they were supposed to be all in the center of the screen one after the other and the adding process to be as i told you before. 
+i will provide you with the code and you will give me small one hint to have the ui i want.
+here is the code: 
+
+
+------------------
+
+a problem have been solved, but there is another one that i wanna solve too.
+now when the list reaches the end of the screen, there is no scroll allowed 
+how to allow it?
