@@ -26,7 +26,7 @@ The UI design of this app is inspired by the
 ### Run the app
 
 ```bash
-git clone Simple-Todo-List.git
+git clone https://github.com/abdellatif72/Simple-Todo-List.git
 cd my_todo_app_1
 flutter pub get
 flutter run
