@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:my_todo_app_1/providers/todo_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +24,7 @@ class _TodoPageState extends State<TodoPage> {
     int doneTodo = 0;
     int remTodo = 0;
     final primaryColor = Color.fromRGBO(79, 79, 79, 1);
+    final primaryColor2 = Color.fromRGBO(79, 79, 79, 0.7);
     final secondaryColor = Colors.grey[50];
     final prov = Provider.of<TodoProvider>(context);
     final width = MediaQuery.of(context).size.width;
@@ -33,7 +35,7 @@ class _TodoPageState extends State<TodoPage> {
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
           child: Center(
             child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 300),
+              constraints: BoxConstraints(maxWidth: 400),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -97,42 +99,44 @@ class _TodoPageState extends State<TodoPage> {
                     ListView.builder(
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        return Dismissible(
-                          onDismissed: (direction) {
-                            if (direction == DismissDirection.startToEnd) {
-                              prov.removeTodo(index);
-                            }
-                          },
-                          background: Container(
-                            color: Colors.red,
-                            alignment: Alignment.centerLeft,
-                            padding: const EdgeInsets.only(left: 20.0),
-                            child: const Icon(
-                              Icons.delete,
-                              color: Colors.white,
-                            ),
+                        return Card(
+                          color: secondaryColor,
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 0,
+                            vertical: 8,
                           ),
-                          direction: DismissDirection.startToEnd,
-                          key: UniqueKey(),
-                          child: Card(
-                            color: secondaryColor,
-                            margin: const EdgeInsets.symmetric(
-                              horizontal: 0,
-                              vertical: 8,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            side: BorderSide(color: primaryColor2),
+                          ),
+                          child: ListTile(
+                            horizontalTitleGap: 0,
+                            contentPadding: EdgeInsets.only(left: 5, right: 10),
+                            leading: Checkbox(
+                              mouseCursor: SystemMouseCursors.basic,
+                              splashRadius: 0,
+                              value: prov.todos[index].isDone,
+                              onChanged: (bool? newValue) {
+                                prov.toggleTodo(index);
+                              },
                             ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              side: BorderSide(color: primaryColor, width: 1),
-                            ),
-                            child: ListTile(
-                              leading: Checkbox(
-                                value: prov.todos[index].isDone,
-                                onChanged: (bool? newValue){
-                                  prov.toggleTodo(index);
-                                },
+                            title: Text(
+                              prov.todos[index].title,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                decoration: prov.todos[index].isDone
+                                    ? TextDecoration.lineThrough
+                                    : TextDecoration.none,
                               ),
-                              title: Text(prov.todos[index].title),
-                              trailing: const Icon(Icons.arrow_forward_ios),
+                            ),
+                            trailing: IconButton(
+                              padding: EdgeInsets.all(0),
+                              icon: const Icon(
+                                Icons.close,
+                                weight: 700,
+                                size: 20,
+                              ),
+                              onPressed: () => prov.removeTodo(index),
                             ),
                           ),
                         );
