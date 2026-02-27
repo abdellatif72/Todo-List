@@ -1,4 +1,4 @@
-# Simple Todo List App with Flutter
+# Todo List App with Flutter
 
 A simple and clean Flutter todo app for managing your daily tasks.
 
@@ -26,7 +26,7 @@ The UI design of this app is inspired by the
 ### Run the app
 
 ```bash
-git clone https://github.com/abdellatif72/Simple-Todo-List.git
+git clone https://github.com/abdellatif72/Todo-List.git
 cd my_todo_app_1
 flutter pub get
 flutter run
